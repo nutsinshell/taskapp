@@ -128,6 +128,21 @@
                                     <!--2017-06-30 02:43:29 +0000-->
                                 </date>
                             </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カテゴリー" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zbn-kX-hAt">
+                                <rect key="frame" x="16" y="436" width="87" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="87" id="Jzr-Hh-qgI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mNU-xC-6oq">
+                                <rect key="frame" x="16" y="467" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -136,10 +151,15 @@
                             <constraint firstItem="Kfy-xB-mpq" firstAttribute="top" secondItem="s87-GZ-uFm" secondAttribute="bottom" constant="10" id="5B9-Nn-WfS"/>
                             <constraint firstItem="CMn-Cb-uBA" firstAttribute="leading" secondItem="Bj1-3n-4Wj" secondAttribute="leading" id="6yF-4a-cu4"/>
                             <constraint firstItem="Uod-S5-BlM" firstAttribute="top" secondItem="EBU-Iz-Q0Y" secondAttribute="bottom" constant="10" id="Cao-QW-bF5"/>
+                            <constraint firstItem="Zbn-kX-hAt" firstAttribute="leading" secondItem="Bj1-3n-4Wj" secondAttribute="leadingMargin" id="Dog-TJ-pZ2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Kfy-xB-mpq" secondAttribute="trailing" id="Gwn-yp-Zkp"/>
                             <constraint firstItem="EBU-Iz-Q0Y" firstAttribute="top" secondItem="Kfy-xB-mpq" secondAttribute="bottom" constant="10" id="HjW-Ot-LPj"/>
                             <constraint firstItem="EBU-Iz-Q0Y" firstAttribute="leading" secondItem="Bj1-3n-4Wj" secondAttribute="leadingMargin" id="LHv-pY-I9F"/>
+                            <constraint firstItem="mNU-xC-6oq" firstAttribute="top" secondItem="Zbn-kX-hAt" secondAttribute="bottom" constant="10" id="LKB-VB-723"/>
                             <constraint firstItem="s87-GZ-uFm" firstAttribute="top" secondItem="yzb-Qv-JDq" secondAttribute="bottom" constant="10" id="Lje-O1-dWQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mNU-xC-6oq" secondAttribute="trailing" id="QOR-ZR-qoy"/>
+                            <constraint firstItem="mNU-xC-6oq" firstAttribute="leading" secondItem="Bj1-3n-4Wj" secondAttribute="leadingMargin" id="TfM-34-gub"/>
+                            <constraint firstItem="Zbn-kX-hAt" firstAttribute="top" secondItem="CMn-Cb-uBA" secondAttribute="bottom" constant="10" id="e62-wN-OZR"/>
                             <constraint firstItem="Kfy-xB-mpq" firstAttribute="leading" secondItem="Bj1-3n-4Wj" secondAttribute="leadingMargin" id="hiC-Z2-wXU"/>
                             <constraint firstItem="Uod-S5-BlM" firstAttribute="leading" secondItem="Bj1-3n-4Wj" secondAttribute="leading" id="jlx-8H-3Jb"/>
                             <constraint firstItem="s87-GZ-uFm" firstAttribute="leading" secondItem="Bj1-3n-4Wj" secondAttribute="leadingMargin" id="qrt-vj-09T"/>
@@ -147,6 +167,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="category" destination="mNU-xC-6oq" id="6GX-Ke-mmx"/>
                         <outlet property="contentsTextView" destination="Uod-S5-BlM" id="mJs-e8-VGf"/>
                         <outlet property="datePicker" destination="CMn-Cb-uBA" id="511-4n-ty0"/>
                         <outlet property="titleTextField" destination="Kfy-xB-mpq" id="uOj-ct-hpA"/>
@@ -154,7 +175,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dOd-S9-dE1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="591" y="-101"/>
+            <point key="canvasLocation" x="589.60000000000002" y="-101.19940029985008"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5XD-d9-jHz">

@@ -73,6 +73,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             // ローカル通知をキャンセルする
             let center = UNUserNotificationCenter.current()
             center.removePendingNotificationRequests(withIdentifiers: [String(task.id)])
+
             // データベースから削除する
             try! realm.write {
                 self.realm.delete(self.taskArray[indexPath.row])
