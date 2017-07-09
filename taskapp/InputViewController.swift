@@ -31,16 +31,17 @@ class InputViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         try! realm.write {
             self.task.title = self.titleTextField.text!
             self.task.contents = self.contentsTextView.text
             self.task.date = self.datePicker.date as NSDate
             self.task.category = self.category.text!
             self.realm.add(self.task, update: true)
-                   }
+        }
+        
         setNotification(task: task)
-
-        super.viewWillDisappear(animated)
     }
     
     

@@ -10,25 +10,31 @@ import UIKit
 import RealmSwift
 import UserNotifications
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource ,UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     let realm = try! Realm()    // Realmインスタンスを取得する
     
     // DB内のタスクが格納されるリスト。日付近い順\順でソート：降順 以降内容をアップデートするとリスト内は自動的に更新される。
     var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: false)
+//    let searchText = searchBar
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-    }
+        searchBar.delegate = self}
+    
+//        self.searchBar.delegate = self as?UISearchBarDelegate }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+
 
     // MARK: UITableViewDataSourceプロトコルのメソッド
     // データの数（＝セルの数）を返すメソッド
@@ -39,7 +45,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // 各セルの内容を返すメソッド
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 再利用可能な cell を得る
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "Cell",
+            for: indexPath
+        )
         
         // Cellに値を設定する.
         let task = taskArray[indexPath.row]
@@ -54,10 +63,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    
+    // 検索ワードを設定し、クリックで反応させる
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        
+        taskArray = try! Realm().objects(Task.self).sorted(
+            byKeyPath: "date",
+            ascending: false).filter("category == %@", searchBar.text ?? String()
+        )
+        
+        tableView.reloadData()
+        
+        print(searchBar.text ?? String())
+    }
+    
+    // 追加
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == "" {
+            taskArray = try! Realm().objects(Task.self).sorted(
+                byKeyPath: "date",
+                ascending: false
+            )
+            tableView.reloadData()
+        }
+    }
+    
+
+    
     // MARK: UITableViewDelegateプロトコルのメソッド
     // 各セルを選択した時に実行されるメソッド
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "cellSegue",sender: nil) // ←追加する
+        performSegue(
+            withIdentifier: "cellSegue",
+            sender: nil
+        )
     }
     
     // セルが削除が可能なことを伝えるメソッド
@@ -89,9 +129,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
-
     
-            
     
     // segue で画面遷移するに呼ばれる
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
@@ -110,13 +148,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             inputViewController.task = task
         }
+        
     }
+    
     
     // 入力画面から戻ってきた時に TableView を更新させる
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
+
+
     
 }
 
